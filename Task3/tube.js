@@ -1,9 +1,8 @@
 export class Tube {
     constructor() {
-        this._onMessage = this._onMessage.bind(this);
         this.onReceive = null;
         this.websocket = new WebSocket('wss://echo.websocket.org/');
-        this.websocket.onmessage = this._onMessage;
+        this.websocket.onmessage = this._onMessage.bind(this);
     }
 
     _onMessage(messageEvent) {
@@ -19,6 +18,3 @@ export class Tube {
         this.websocket.send(json);
     }
 }
-
-const tube1 = new Tube()
-const tube2 = new Tube()
